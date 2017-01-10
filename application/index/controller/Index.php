@@ -15,9 +15,10 @@ class Index
         $auth = Auth::instance();
 
         $data = [
+            'menu_id' => '51',
             'menu_app' => 'index',
             'menu_model' => 'auth',
-            'menu_action' => 'lmx',
+            'menu_action' => 'lmx789',
             'menu_name' => '哈哈',
             'menu_type' => 1,
         ];
@@ -30,7 +31,7 @@ class Index
 //        }
 //        exit;
 
-        $auth->addMenu($data);
+        $auth->saveMenu($data,true);
 
 
 
