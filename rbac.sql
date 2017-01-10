@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2017-01-09 18:35:23
+Date: 2017-01-10 18:34:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -73,7 +73,7 @@ CREATE TABLE `lmx_auth_menu` (
   `menu_app` char(20) DEFAULT NULL COMMENT '应用名称',
   `menu_model` char(20) DEFAULT NULL COMMENT '控制器',
   `menu_action` char(20) DEFAULT NULL COMMENT '操作名称',
-  `menu__param` char(50) DEFAULT NULL COMMENT 'url参数',
+  `menu_param` char(50) DEFAULT NULL COMMENT 'url参数',
   `menu_type` tinyint(1) DEFAULT '0' COMMENT '菜单类型  1：权限认证+菜单；0：只作为菜单',
   `menu_status` tinyint(1) unsigned DEFAULT '0' COMMENT '状态，1显示，0不显示',
   `menu_name` varchar(50) DEFAULT NULL COMMENT '菜单名称',
@@ -89,7 +89,7 @@ CREATE TABLE `lmx_auth_menu` (
   KEY `status` (`menu_status`) USING BTREE,
   KEY `model` (`menu_model`) USING BTREE,
   KEY `parent_id` (`parent_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='后台菜单表';
+) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='后台菜单表';
 
 -- ----------------------------
 -- Records of lmx_auth_menu
@@ -114,7 +114,8 @@ INSERT INTO `lmx_auth_menu` VALUES ('17', '15', 'index', 'auth', 'menuEdit', 'da
 INSERT INTO `lmx_auth_menu` VALUES ('20', '2', 'index', 'auth', 'log', '', '1', '1', '行为日志', '', '', '0', null, null, '0', '', '');
 INSERT INTO `lmx_auth_menu` VALUES ('19', '16', 'index', 'auth', 'menuEdit', 'id=5', '1', '1', '测试5', '', 'dasd', '0', null, null, '0', 'GET', '{id}');
 INSERT INTO `lmx_auth_menu` VALUES ('21', '20', 'index', 'auth', 'viewLog', '', '1', '0', '查看日志', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_auth_menu` VALUES ('22', '20', 'index', 'auth', 'clear', '', '1', '0', '清空日志', '', '', '0', null, null, '0', '', '');
+INSERT INTO `lmx_auth_menu` VALUES ('22', '20', 'index', 'auth', 'lmx123', '', '1', '0', '哈哈', '', '', '0', null, '1484044394', '0', '', '');
+INSERT INTO `lmx_auth_menu` VALUES ('51', '0', 'index', 'auth', 'lmx', null, '1', '0', '哈哈', null, null, '0', '1484039887', '1484043176', '0', null, null);
 
 -- ----------------------------
 -- Table structure for lmx_auth_rule
@@ -128,13 +129,14 @@ CREATE TABLE `lmx_auth_rule` (
   `rule_status` tinyint(1) DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `rule_condition` char(100) DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证',
   `rule_sort` int(10) DEFAULT NULL COMMENT '排序',
-  `rule_group_name` varchar(255) DEFAULT NULL COMMENT '规则分组名称',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   `update_time` int(11) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`rule_id`),
   UNIQUE KEY `name` (`rule_name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='规则表';
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='规则表';
 
 -- ----------------------------
 -- Records of lmx_auth_rule
 -- ----------------------------
+INSERT INTO `lmx_auth_rule` VALUES ('5', 'index/auth/lmx789', '哈哈', '1', '1', '', null, '1484039887', '1484039887');
+INSERT INTO `lmx_auth_rule` VALUES ('6', 'index/auth/lmx', '哈哈', '1', '1', '', null, '1484042652', '1484042652');
