@@ -11,15 +11,15 @@
 
 namespace app\index\controller;
 
-use app\index\model\AuthMenu;
+use app\index\model\Menu;
 use app\index\model\AuthRule;
 
 
 /**
- * Class Auth 菜单控制器
+ * Class Auth 节点控制器
  * @package app\index\controller
  */
-class Menu extends Base {
+class Node extends Base {
 
     use \traits\controller\Jump;
 
@@ -29,13 +29,14 @@ class Menu extends Base {
     public function index(){
 
         // 用户组模型
-        $authMenu = AuthMenu::getInstance();
+        $Menu = Menu::getInstance();
+
         $where = [];
-        $lists = $authMenu::where($where)
+        $lists = $Menu::where($where)
             ->field(
-                ['menu_id','parent_id','menu_app','menu_model','menu_action','menu_param','menu_type','menu_status','menu_name','menu_icon','menu_sort','create_time','update_time']
+                ['id','parent_id','app','model','action','param','type','status','name','icon','listorder','create_time','update_time']
             )
-            ->order(['menu_sort' => 'ASC','menu_id' => 'DESC'])
+            ->order(['listorder' => 'ASC','id' => 'DESC'])
             ->select();
 
         foreach ($lists as $key => $value){
@@ -54,41 +55,41 @@ class Menu extends Base {
         if (1){
             $data = $this->request->post();
             $data = [
-                'menu_app' => 'index',
-                'menu_model' => 'auth',
-                'menu_action' => 'lmx789',
-                'menu_name' => '哈哈',
-                'menu_type' => 1,
+                'app' => 'index',
+                'model' => 'auth',
+                'action' => 'add',
+                'name' => '哈哈',
+                'type' => 1,
             ];
             if (empty($data)){
                 $this->result([],40000,'数据不能为空');
             }
 
-            $result = $this->validate($data,'AuthMenu');
+            $result = $this->validate($data,'Menu');
             if (false === $result){
                 //数据验证失败
                 $this->result([],40001,$result);
             }
 
             // 菜单模型
-            $authMenu = AuthMenu::getInstance();
-            $result = $authMenu->save($data);
+            $Menu = Menu::getInstance();
+            $result = $Menu->save($data);
 
             if (empty($result)){
                 $this->result([],0,'菜单添加失败');
             }
 
-            if (!empty($data['menu_type']) && $data['menu_type'] == 1){
+            if (!empty($data['type']) && $data['type'] == 1){
                 // 菜单需要验证
-                $rule_name = $data['menu_app'].'/'.$data["menu_model"].'/'.$data['menu_action'];
+                $rule_name = $data['app'].'/'.$data["model"].'/'.$data['action'];
                 $rule_where = [];
-                $rule_where['rule_name'] = $rule_name;
+                $rule_where['name'] = $rule_name;
                 $authRule = AuthRule::get($rule_where);
                 if (empty($authRule)){
                     //如果没有规则就添加
                     $ruleDate = [
-                        'rule_name'     =>      $rule_name,
-                        'rule_title'    =>      !empty($data['menu_name']) ? $data['menu_name'] : '',
+                        'name'     =>      $rule_name,
+                        'title'    =>      !empty($data['name']) ? $data['name'] : '',
                     ];
                     $rule_res = AuthRule::getInstance()->save($ruleDate);
 
@@ -114,12 +115,12 @@ class Menu extends Base {
      */
     public function edit(){
 
-        $menu_id = $this->request->param('menu_id/d');
-        $where['menu_id'] = $menu_id;
+        $id = $this->request->param('id/d');
+        $where['id'] = $id;
         // 菜单模型
-        $authMenu = AuthMenu::where($where)
+        $Menu = Menu::where($where)
             ->field(
-                ['menu_id','parent_id','menu_app','menu_model','menu_action','menu_param','menu_type','menu_status','menu_name','menu_icon','menu_sort','create_time','update_time']
+                ['id','parent_id','app','model','action','param','type','status','name','icon','listorder','create_time','update_time']
             )
             ->find();
 
@@ -127,41 +128,41 @@ class Menu extends Base {
         if (1){
             $data = $this->request->post();
             $data = [
-                'menu_id' => '22',
-                'menu_app' => 'index',
-                'menu_model' => 'auth',
-                'menu_action' => 'lmx',
-                'menu_name' => '哈哈',
-                'menu_type' => 1,
+                'id' => '22',
+                'app' => 'index',
+                'model' => 'auth',
+                'action' => 'edit1',
+                'name' => '嘿嘿',
+                'type' => 1,
             ];
             if (empty($data)){
                 $this->result([],40000,'数据不能为空');
             }
-            if (empty($authMenu)){
+            if (empty($Menu)){
                 $this->result([],50002,'没有菜单信息');
             }
 
-            $result = $this->validate($data,'AuthMenu');
+            $result = $this->validate($data,'Menu');
             if (false === $result){
                 //数据验证失败
                 $this->result([],40001,$result);
             }
 
-            $result = $authMenu->isUpdate(true)->save($data);
+            $result = $Menu->isUpdate(true)->save($data);
 
             if (false === $result){
                 $this->result([],-1,'数据更新失败');
             }
 
-            if (!empty($data['menu_type']) && $data['menu_type'] == 1){
-                $rule_name = $data['menu_app'].'/'.$data["menu_model"].'/'.$data['menu_action'];
+            if (!empty($data['type']) && $data['type'] == 1){
+                $rule_name = $data['app'].'/'.$data["model"].'/'.$data['action'];
 
                 $rule_where = [];
-                $rule_where['rule_name'] = $authMenu->menu_app.'/'.$authMenu->menu_model.'/'.$authMenu->menu_action;
+                $rule_where['name'] = $Menu->app.'/'.$Menu->model.'/'.$Menu->action;
                 $authRule = AuthRule::get($rule_where);
                 $ruleDate = [
-                    'rule_name'     =>      $rule_name,
-                    'rule_title'    =>      !empty($data['menu_name']) ? $data['menu_name'] : '',
+                    'name'     =>      $rule_name,
+                    'title'    =>      !empty($data['name']) ? $data['name'] : '',
                 ];
                 $result = $this->validate($ruleDate,'AuthRule');
                 if (false === $result){
@@ -183,18 +184,18 @@ class Menu extends Base {
                 }
             }
 
-            $this->result($data,1,'菜单添加成功');
+            $this->result($data,1,'菜单更新成功');
 
 
         }else{
 
             //编辑页面
-            if (empty($authMenu)){
+            if (empty($Menu)){
                 $this->error('没有菜单信息');
             }
 
             $this->view->fetch('edit',[
-                'authMenu' => $authMenu,
+                'Menu' => $Menu,
             ]);
 
 

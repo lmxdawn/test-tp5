@@ -16,10 +16,10 @@ use think\Validate;
 
 
 /**
- * Class AuthGroup 用户组模型验证器
+ * Class AuthGroup 用户角色对应表模型验证器
  * @package app\index\validate
  */
-class AuthGroup extends Validate
+class RoleUser extends Validate
 {
     //当前验证的规则
     protected $rule = [

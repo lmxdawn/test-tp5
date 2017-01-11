@@ -9,30 +9,37 @@
 // | Author: Byron Sampson <lmxdawn@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace app\index\validate;
+namespace app\index\model;
 
-
-use think\Validate;
-
+use think\Model;
 
 /**
- * Class AuthGroup 用户组明细模型验证器
- * @package app\index\validate
+ * Class AuthGroup 权限授权表模型
+ * @package app\index\model
  */
-class AuthGroupAccess extends Validate
+class AuthAccess extends Model
 {
-    //当前验证的规则
-    protected $rule = [
 
-    ];
+    /**
+     * @var object 对象实例
+     */
+    protected static $instance;
 
-    //验证提示信息
-    protected $message = [
+    /**
+     * 初始化
+     * @param array $data 数据
+     * @return object|static
+     */
+    public static function getInstance($data = []) {
+        if (is_null(self::$instance)) {
+            self::$instance = new self($data);
+        }
+        return self::$instance;
+    }
 
-    ];
 
-    //验证场景 scene = ['edit'=>'name1,name2,...']
-    protected $scene = [
 
-    ];
+
+
+
 }

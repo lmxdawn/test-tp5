@@ -14,12 +14,31 @@ namespace app\index\model;
 use think\Model;
 
 /**
- * Class AuthGroupAccess 用户-用户组关系表模型
+ * Class AuthGroupAccess 角色表模型
  * @package app\index\model
  */
-class AuthGroupAccess extends Model
+class Role extends Model
 {
 
+    // 数据完成时
+    protected $auto = ['update_time'];
+    protected $insert = ['create_time'];
+    protected $update = [];
+
+
+    /**
+     * 设置更新时间字段
+     */
+    protected function setUpdateTimeAttr(){
+        return time();
+    }
+
+    /**
+     * 设置创建时间字段
+     */
+    protected function setCreateTimeAttr(){
+        return time();
+    }
 
     /**
      * @var object 对象实例

@@ -14,24 +14,17 @@ namespace app\index\model;
 use think\Model;
 
 /**
- * Class AuthRule 菜单表模型
+ * Class Member 用户信息表模型
  * @package app\index\model
  */
-class AuthMenu extends Model
+class Users extends Model
 {
 
     // 数据完成时
-    protected $auto = ['update_time'];
+    protected $auto = [];
     protected $insert = ['create_time'];
     protected $update = [];
 
-
-    /**
-     * 设置更新时间字段
-     */
-    protected function setUpdateTimeAttr(){
-        return time();
-    }
 
     /**
      * 设置创建时间字段
@@ -56,6 +49,10 @@ class AuthMenu extends Model
         }
         return self::$instance;
     }
+
+
+
+
 
 
 }
