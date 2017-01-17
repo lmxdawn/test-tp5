@@ -37,7 +37,7 @@ class Test{
 
             dump($result);
 
-            $test->db()->commit();
+            //$test->db()->commit();
 
 
         }catch (\Exception $e){
@@ -46,13 +46,16 @@ class Test{
         }
 
 
-//        //数据里面的事务
-//        // 启动事务
+        //数据里面的事务
+        // 启动事务
 //        Db::startTrans();
 //        try{
-//            Db::name('test')->insert(['name' => '123456']);
+//            //Db::name('test')->insert(['name' => '123456']);
+//            $test->name = '123456';
+//            $result = $test->save();
+//            dump($result);
 //            // 提交事务
-//            Db::commit();
+//            //Db::commit();
 //            //Db::rollback();
 //        } catch (\Exception $e) {
 //            // 回滚事务
