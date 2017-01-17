@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : localhost_3306
 Source Server Version : 50540
 Source Host           : localhost:3306
-Source Database       : rbac
+Source Database       : think
 
 Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2017-01-11 17:25:33
+Date: 2017-01-17 13:59:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,10 +28,6 @@ CREATE TABLE `lmx_auth_access` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='权限授权表';
 
 -- ----------------------------
--- Records of lmx_auth_access
--- ----------------------------
-
--- ----------------------------
 -- Table structure for lmx_auth_rule
 -- ----------------------------
 DROP TABLE IF EXISTS `lmx_auth_rule`;
@@ -47,14 +43,7 @@ CREATE TABLE `lmx_auth_rule` (
   `update_time` int(11) DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='规则表';
-
--- ----------------------------
--- Records of lmx_auth_rule
--- ----------------------------
-INSERT INTO `lmx_auth_rule` VALUES ('19', 'index/auth/edit', '嘿嘿', '1', '1', '', '0', '1484126618', '1484126652');
-INSERT INTO `lmx_auth_rule` VALUES ('20', 'index/auth/edit1', '嘿嘿', '1', '1', '', '0', '1484126673', '1484126673');
-INSERT INTO `lmx_auth_rule` VALUES ('21', 'index/auth/add', '哈哈', '1', '1', '', '0', '1484126685', '1484126685');
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='规则表';
 
 -- ----------------------------
 -- Table structure for lmx_menu
@@ -82,36 +71,7 @@ CREATE TABLE `lmx_menu` (
   KEY `status` (`status`) USING BTREE,
   KEY `model` (`model`) USING BTREE,
   KEY `parent_id` (`parent_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COMMENT='后台菜单表';
-
--- ----------------------------
--- Records of lmx_menu
--- ----------------------------
-INSERT INTO `lmx_menu` VALUES ('1', '0', 'index', 'auth', 'default', '', '0', '1', '系统管理', '', '', '10', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('2', '1', 'index', 'auth', 'default', '', '0', '1', '权限管理', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('3', '2', 'index', 'auth', 'role', '', '1', '1', '角色管理', '', '1', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('4', '3', 'index', 'auth', 'roleAdd', '', '1', '0', '角色增加', '', '', '0', null, null, '0', '', '{id}');
-INSERT INTO `lmx_menu` VALUES ('5', '3', 'index', 'auth', 'roleEdit', '', '1', '0', '角色编辑', '', 'asdas', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('6', '3', 'index', 'auth', 'roleDelete', '', '1', '0', '角色删除', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('7', '3', 'index', 'auth', 'authorize', '', '1', '0', '角色授权', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('8', '1', 'index', 'auth', 'default', '', '0', '1', '菜单管理', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('9', '8', 'index', 'auth', 'menu', '', '1', '1', '菜单列表', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('10', '9', 'index', 'auth', 'menuAdd', '', '1', '0', '菜单增加', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('11', '9', 'index', 'auth', 'menuEdit', '', '1', '0', '菜单修改', '', '', '0', null, null, '0', 'POST', '我的ID是{id} <br> 记入的目录{name}');
-INSERT INTO `lmx_menu` VALUES ('12', '9', 'index', 'auth', 'menuDelete', '', '1', '0', '菜单删除', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('13', '9', 'index', 'auth', 'menuOrder', '', '1', '0', '菜单排序', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('14', '2', 'index', 'admin', 'index', '', '1', '1', '用户管理', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('15', '0', 'index', 'index', 'sasd', '', '0', '1', '测试', '', '', '20', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('16', '15', 'index', 'index', 'asd', 'asd', '1', '1', '测试', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('17', '15', 'index', 'auth', 'menuEdit', 'dasd', '1', '1', '边缘', '', '11q1adas1adsasdfsdfdsd', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('20', '2', 'index', 'auth', 'log', '', '1', '1', '行为日志', '', '', '0', null, null, '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('19', '16', 'index', 'auth', 'menuEdit', 'id=5', '1', '1', '测试5', '', 'dasd', '0', null, null, '0', 'GET', '{id}');
-INSERT INTO `lmx_menu` VALUES ('21', '20', 'index', 'auth', 'edit1', '', '1', '0', '嘿嘿', '', '', '0', null, '1484126673', '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('22', '20', 'index', 'auth', 'lmx123', '', '1', '0', '哈哈', '', '', '0', null, '1484044394', '0', '', '');
-INSERT INTO `lmx_menu` VALUES ('51', '0', 'index', 'auth', 'lmx', null, '1', '0', '哈哈', null, null, '0', '1484039887', '1484043176', '0', null, null);
-INSERT INTO `lmx_menu` VALUES ('52', '0', 'index', 'auth', 'lmx789', null, '1', '0', '哈哈', null, null, '0', '1484122117', '1484122117', '0', null, null);
-INSERT INTO `lmx_menu` VALUES ('53', '0', 'index', 'auth', 'add', null, '1', '0', '哈哈', null, null, '0', '1484126685', '1484126685', '0', null, null);
-INSERT INTO `lmx_menu` VALUES ('54', '0', 'index', 'auth', 'add', null, '1', '0', '哈哈', null, null, '0', '1484126702', '1484126702', '0', null, null);
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COMMENT='后台菜单表';
 
 -- ----------------------------
 -- Table structure for lmx_role
@@ -132,11 +92,6 @@ CREATE TABLE `lmx_role` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
--- Records of lmx_role
--- ----------------------------
-INSERT INTO `lmx_role` VALUES ('1', '超级管理员', '0', '1', '拥有网站最高管理员权限！', '1329633709', '1329633709', '0');
-
--- ----------------------------
 -- Table structure for lmx_role_user
 -- ----------------------------
 DROP TABLE IF EXISTS `lmx_role_user`;
@@ -148,8 +103,12 @@ CREATE TABLE `lmx_role_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户角色对应表';
 
 -- ----------------------------
--- Records of lmx_role_user
+-- Table structure for lmx_test
 -- ----------------------------
+DROP TABLE IF EXISTS `lmx_test`;
+CREATE TABLE `lmx_test` (
+  `name` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='测试事务用的表';
 
 -- ----------------------------
 -- Table structure for lmx_users
@@ -179,7 +138,3 @@ CREATE TABLE `lmx_users` (
   KEY `user_login_key` (`user_login`),
   KEY `user_nicename` (`user_nicename`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
-
--- ----------------------------
--- Records of lmx_users
--- ----------------------------
